@@ -345,24 +345,6 @@ Peli AirКейс Peli Air 1465 473 x 254 x 278
 Кейс Peli Air 1755 1397 x 356 x 203
 Кейс Peli Air 1646 814 x 403 x 341
 Peli Ruck Персональний кейс Peli Ruck R60 283 x 174 x 99
-```
-</script>
-    <script>
-      // Реєстрація Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
-            .then(registration => {
-              console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            })
-            .catch(err => {
-              console.log('ServiceWorker registration failed: ', err);
-            });
-        });
-      }
-    </script>
-</body>
-</html>
 Peli HardBackКейс 1075 HardBack 282 x 201 x 41
         `;
 
@@ -887,6 +869,20 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
             init();
         };
 
+    </script>
+    <script>
+      // Реєстрація Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
     </script>
 </body>
 </html>

@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Перевірка Габаритів 3D</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#ffffff">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -50,14 +48,8 @@
             .controls-panel { max-height: 55vh; }
             .canvas-container { min-height: 40vh; }
         }
-        /* Стилі для списку кейсів */
-        #suitableCasesList li {
-            padding: 2px 0;
-            border-bottom: 1px solid #eee;
-        }
-         #suitableCasesList li:last-child {
-            border-bottom: none;
-        }
+        #suitableCasesList li { padding: 2px 0; border-bottom: 1px solid #eee; }
+        #suitableCasesList li:last-child { border-bottom: none; }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,41 +69,92 @@
             </select>
         </div>
 
-        <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
-             <h2 class="text-lg font-semibold mb-3 text-gray-700">Прилад</h2>
+        <div class="mb-4 flex items-center">
+            <input id="twoDevicesCheckbox" name="twoDevicesCheckbox" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            <label for="twoDevicesCheckbox" class="ml-2 block text-sm font-medium text-gray-700">Використовувати два прилади</label>
+        </div>
+
+        <div id="deviceOneControls" class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+             <h2 class="text-lg font-semibold mb-3 text-gray-700">Прилад 1</h2>
              <div class="mb-4">
-                 <label for="devicePreset" class="block text-sm font-medium text-gray-700 mb-1">Пресет Приладу:</label>
-                 <select id="devicePreset" name="devicePreset" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                 <label for="devicePreset1" class="block text-sm font-medium text-gray-700 mb-1">Пресет Приладу 1:</label>
+                 <select id="devicePreset1" name="devicePreset1" class="device-preset-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                      <option value="">-- Вибрати пресет --</option>
                  </select>
              </div>
              <div class="grid grid-cols-1 gap-y-3">
                 <div>
-                    <label for="deviceL" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Довжина (L)</label>
+                    <label for="deviceL1" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Довжина (L)</label>
                     <div class="mt-1 flex items-center space-x-1">
-                        <input type="number" id="deviceL" value="50" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
-                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceL" data-step="-1">-</button>
-                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceL" data-step="1">+</button>
+                        <input type="number" id="deviceL1" value="50" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
+                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceL1" data-step="-1">-</button>
+                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceL1" data-step="1">+</button>
                     </div>
                 </div>
                  <div>
-                    <label for="deviceW" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Ширина (W)</label>
+                    <label for="deviceW1" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Ширина (W)</label>
                      <div class="mt-1 flex items-center space-x-1">
-                        <input type="number" id="deviceW" value="30" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
-                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceW" data-step="-1">-</button>
-                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceW" data-step="1">+</button>
+                        <input type="number" id="deviceW1" value="30" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
+                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceW1" data-step="-1">-</button>
+                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceW1" data-step="1">+</button>
                     </div>
                 </div>
                  <div>
-                    <label for="deviceH" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Висота (H)</label>
+                    <label for="deviceH1" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Висота (H)</label>
                      <div class="mt-1 flex items-center space-x-1">
-                        <input type="number" id="deviceH" value="20" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
-                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceH" data-step="-1">-</button>
-                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceH" data-step="1">+</button>
+                        <input type="number" id="deviceH1" value="20" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
+                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceH1" data-step="-1">-</button>
+                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceH1" data-step="1">+</button>
                     </div>
                 </div>
             </div>
         </div>
+
+         <div id="deviceTwoControls" class="hidden mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+             <h2 class="text-lg font-semibold mb-3 text-gray-700">Прилад 2</h2>
+             <div class="mb-4">
+                 <label for="devicePreset2" class="block text-sm font-medium text-gray-700 mb-1">Пресет Приладу 2:</label>
+                 <select id="devicePreset2" name="devicePreset2" class="device-preset-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                     <option value="">-- Вибрати пресет --</option>
+                 </select>
+             </div>
+             <div class="grid grid-cols-1 gap-y-3">
+                <div>
+                    <label for="deviceL2" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Довжина (L)</label>
+                    <div class="mt-1 flex items-center space-x-1">
+                        <input type="number" id="deviceL2" value="50" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
+                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceL2" data-step="-1">-</button>
+                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceL2" data-step="1">+</button>
+                    </div>
+                </div>
+                 <div>
+                    <label for="deviceW2" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Ширина (W)</label>
+                     <div class="mt-1 flex items-center space-x-1">
+                        <input type="number" id="deviceW2" value="30" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
+                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceW2" data-step="-1">-</button>
+                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceW2" data-step="1">+</button>
+                    </div>
+                </div>
+                 <div>
+                    <label for="deviceH2" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Висота (H)</label>
+                     <div class="mt-1 flex items-center space-x-1">
+                        <input type="number" id="deviceH2" value="20" min="0.1" step="any" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
+                        <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceH2" data-step="-1">-</button>
+                        <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceH2" data-step="1">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div id="deviceSpacingControls" class="hidden mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <label for="deviceSpacing" class="block text-xs font-medium text-gray-600 unit-label" data-unit="мм">Вертикальна відстань між приладами</label>
+             <div class="mt-1 flex items-center space-x-1">
+                <input type="number" id="deviceSpacing" value="10" min="0" step="1" class="dimension-input flex-grow border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm p-2">
+                <button class="adjust-btn bg-red-200 hover:bg-red-300 text-red-800 rounded" data-target="deviceSpacing" data-step="-1">-</button>
+                <button class="adjust-btn bg-green-200 hover:bg-green-300 text-green-800 rounded" data-target="deviceSpacing" data-step="1">+</button>
+            </div>
+         </div>
+
 
         <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
              <h2 class="text-lg font-semibold mb-3 text-gray-700">Ящик (Кейс)</h2>
@@ -150,8 +193,7 @@
         </div>
 
         <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
-             <h2 class="text-lg font-semibold mb-3 text-gray-700">Обертання приладу</h2>
-            <div class="space-y-3">
+             <h2 class="text-lg font-semibold mb-3 text-gray-700">Обертання приладів</h2> <div class="space-y-3">
                 <div>
                     <label for="rotateX" class="block text-xs font-medium text-gray-600">Вісь X (<span id="rotateXValue">0</span>°)</label>
                     <input type="range" id="rotateX" min="0" max="360" value="0" step="1" class="mt-1 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
@@ -188,7 +230,6 @@
             <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
                 <h3 class="text-md font-semibold mb-2 text-gray-700">Підходящі пресети кейсів:</h3>
                 <ol id="suitableCasesList" class="text-sm list-decimal list-inside space-y-1 text-gray-600 max-h-40 overflow-y-auto">
-                    {/* Список буде заповнено через JavaScript */}
                     <li class="text-gray-400 italic">Розрахунок...</li>
                 </ol>
             </div>
@@ -205,7 +246,9 @@
     <script>
         // --- Глобальні змінні Three.js ---
         let scene, camera, renderer, controls, gridHelper;
-        let boxMesh, deviceGroup, deviceCollisionMesh;
+        let boxMesh;
+        let deviceGroup1, deviceCollisionMesh1; // Для першого приладу
+        let deviceGroup2, deviceCollisionMesh2; // Для другого приладу
         let boxBoundingBox;
         const deviceColorFit = 0x10B981;
         const deviceColorNoFit = 0xEF4444;
@@ -220,14 +263,27 @@
         const container3d = document.getElementById('container3d');
         const loadingIndicator = document.getElementById('loading-indicator');
         const unitSelect = document.getElementById('units');
-        const deviceLInput = document.getElementById('deviceL');
-        const deviceWInput = document.getElementById('deviceW');
-        const deviceHInput = document.getElementById('deviceH');
-        const devicePresetSelect = document.getElementById('devicePreset');
+        const twoDevicesCheckbox = document.getElementById('twoDevicesCheckbox'); // Чекбокс
+        // Прилад 1
+        const deviceLInput1 = document.getElementById('deviceL1');
+        const deviceWInput1 = document.getElementById('deviceW1');
+        const deviceHInput1 = document.getElementById('deviceH1');
+        const devicePresetSelect1 = document.getElementById('devicePreset1');
+        // Прилад 2
+        const deviceTwoControlsDiv = document.getElementById('deviceTwoControls'); // Контейнер для приладу 2
+        const deviceLInput2 = document.getElementById('deviceL2');
+        const deviceWInput2 = document.getElementById('deviceW2');
+        const deviceHInput2 = document.getElementById('deviceH2');
+        const devicePresetSelect2 = document.getElementById('devicePreset2');
+        // Відстань
+        const deviceSpacingControlsDiv = document.getElementById('deviceSpacingControls'); // Контейнер для відстані
+        const deviceSpacingInput = document.getElementById('deviceSpacing');
+        // Ящик
         const boxLInput = document.getElementById('boxL');
         const boxWInput = document.getElementById('boxW');
         const boxHInput = document.getElementById('boxH');
         const casePresetSelect = document.getElementById('casePreset');
+        // Обертання
         const rotateXSlider = document.getElementById('rotateX');
         const rotateYSlider = document.getElementById('rotateY');
         const rotateZSlider = document.getElementById('rotateZ');
@@ -235,6 +291,7 @@
         const rotateYValueSpan = document.getElementById('rotateYValue');
         const rotateZValueSpan = document.getElementById('rotateZValue');
         const resetRotationButton = document.getElementById('resetRotation');
+        // Статус та інше
         const statusIndicator = document.getElementById('status-indicator');
         const statusText = document.getElementById('status-text');
         const unitLabels = document.querySelectorAll('.unit-label');
@@ -243,7 +300,7 @@
         const clearanceLSpan = document.getElementById('clearanceL');
         const clearanceWSpan = document.getElementById('clearanceW');
         const clearanceHSpan = document.getElementById('clearanceH');
-        const suitableCasesListElement = document.getElementById('suitableCasesList'); // Елемент для списку кейсів
+        const suitableCasesListElement = document.getElementById('suitableCasesList');
 
 
         // --- Фактори конвертації в мм ---
@@ -391,9 +448,9 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
                 populateDevicePresetDropdown();
 
                 // Важливо: встановлюємо дефолтний пресет ПЕРЕД першим createObjects
-                setDefaultDevicePreset();
+                setDefaultDevicePreset(); // Встановлює розміри для приладу 1
 
-                createObjects(); // Тепер використовує дефолтні розміри приладу
+                createObjects(); // Створює об'єкти на основі полів вводу
                 addEventListeners();
                 updateUnitLabels();
                 animate();
@@ -449,7 +506,7 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
             return boxGroup;
         }
 
-        // --- Створення Приладу (без змін) ---
+        // --- Створення Приладу ---
         function createDevice(width, height, depth) {
              const group = new THREE.Group();
              const bodyMat = new THREE.MeshStandardMaterial({ color: deviceBaseColor, roughness: 0.6, metalness: 0.1 });
@@ -496,54 +553,87 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
         // --- Створення та оновлення 3D об'єктів ---
         function createObjects() {
             console.log("3D Check: createObjects()...");
-            // Очищення сцени...
-             if (boxMesh) {
-                scene.remove(boxMesh);
-                boxMesh.traverse(child => { if (child.geometry) child.geometry.dispose(); if (child.material) { if (Array.isArray(child.material)) child.material.forEach(mat => mat.dispose()); else child.material.dispose(); } });
-             }
-            if (deviceGroup) {
-                scene.remove(deviceGroup);
-                 deviceGroup.traverse(child => { if (child.geometry) child.geometry.dispose(); if (child.material) { if (Array.isArray(child.material)) child.material.forEach(mat => mat.dispose()); else child.material.dispose(); } });
-            }
-             if (deviceCollisionMesh) {
-                 scene.remove(deviceCollisionMesh);
-                 if(deviceCollisionMesh.geometry) deviceCollisionMesh.geometry.dispose();
-                 if(deviceCollisionMesh.material) deviceCollisionMesh.material.dispose();
-             }
-             boxMesh = null; deviceGroup = null; deviceCollisionMesh = null; boxBoundingBox = null;
+            // --- Очищення сцени ---
+            if (boxMesh) { scene.remove(boxMesh); boxMesh.traverse(child => { if (child.geometry) child.geometry.dispose(); if (child.material) { if (Array.isArray(child.material)) child.material.forEach(mat => mat.dispose()); else child.material.dispose(); } }); boxMesh = null;}
+            if (deviceGroup1) { scene.remove(deviceGroup1); deviceGroup1.traverse(child => { if (child.geometry) child.geometry.dispose(); if (child.material) { if (Array.isArray(child.material)) child.material.forEach(mat => mat.dispose()); else child.material.dispose(); } }); deviceGroup1 = null;}
+            if (deviceCollisionMesh1) { scene.remove(deviceCollisionMesh1); if(deviceCollisionMesh1.geometry) deviceCollisionMesh1.geometry.dispose(); if(deviceCollisionMesh1.material) deviceCollisionMesh1.material.dispose(); deviceCollisionMesh1 = null;}
+            if (deviceGroup2) { scene.remove(deviceGroup2); deviceGroup2.traverse(child => { if (child.geometry) child.geometry.dispose(); if (child.material) { if (Array.isArray(child.material)) child.material.forEach(mat => mat.dispose()); else child.material.dispose(); } }); deviceGroup2 = null;}
+            if (deviceCollisionMesh2) { scene.remove(deviceCollisionMesh2); if(deviceCollisionMesh2.geometry) deviceCollisionMesh2.geometry.dispose(); if(deviceCollisionMesh2.material) deviceCollisionMesh2.material.dispose(); deviceCollisionMesh2 = null;}
+            boxBoundingBox = null;
 
+            // --- Отримання розмірів ---
             const units = unitSelect.value;
             const factor = conversionFactors[units];
+            const useTwoDevices = twoDevicesCheckbox.checked;
+
+            // Розміри ящика (внутрішні)
             const boxL = Math.max(0.1, parseFloat(boxLInput.value) * factor);
             const boxW = Math.max(0.1, parseFloat(boxWInput.value) * factor);
             const boxH = Math.max(0.1, parseFloat(boxHInput.value) * factor);
-            const devL = Math.max(0.1, parseFloat(deviceLInput.value) * factor);
-            const devW = Math.max(0.1, parseFloat(deviceWInput.value) * factor);
-            const devH = Math.max(0.1, parseFloat(deviceHInput.value) * factor);
+
+            // Розміри приладу 1
+            const devL1 = Math.max(0.1, parseFloat(deviceLInput1.value) * factor);
+            const devW1 = Math.max(0.1, parseFloat(deviceWInput1.value) * factor);
+            const devH1 = Math.max(0.1, parseFloat(deviceHInput1.value) * factor);
 
             console.log(`3D Check: Box Inner (mm): ${boxL}x${boxW}x${boxH}`);
-            console.log(`3D Check: Device (mm): ${devL}x${devW}x${devH}`);
+            console.log(`3D Check: Device 1 (mm): ${devL1}x${devW1}x${devH1}`);
 
+            // --- Створення Ящика ---
             try {
-                boxMesh = createBox(boxL, boxH, boxW);
+                boxMesh = createBox(boxL, boxH, boxW); // width=L, height=H, depth=W
                 scene.add(boxMesh);
                 console.log("3D Check: Box created");
-            } catch (error) {
-                 console.error("3D Check: Box creation error:", error);
-                 updateStatus("Помилка геометрії ящика", "bg-red-500"); return;
-            }
-             try {
-                 const deviceData = createDevice(devL, devH, devW);
-                 deviceGroup = deviceData.visibleGroup;
-                 deviceCollisionMesh = deviceData.collisionMesh;
-                 scene.add(deviceGroup);
-                 scene.add(deviceCollisionMesh);
-                 console.log("3D Check: Device created");
-             } catch(error) {
-                console.error("3D Check: Device creation error:", error);
-                updateStatus("Помилка геометрії приладу", "bg-red-500"); return;
-             }
+            } catch (error) { console.error("3D Check: Box creation error:", error); updateStatus("Помилка геометрії ящика", "bg-red-500"); return; }
 
+             // --- Створення Приладу 1 ---
+             try {
+                 const deviceData1 = createDevice(devL1, devH1, devW1); // width=L, height=H, depth=W
+                 deviceGroup1 = deviceData1.visibleGroup;
+                 deviceCollisionMesh1 = deviceData1.collisionMesh;
+                 scene.add(deviceGroup1);
+                 scene.add(deviceCollisionMesh1);
+                 console.log("3D Check: Device 1 created");
+             } catch(error) { console.error("3D Check: Device 1 creation error:", error); updateStatus("Помилка геометрії приладу 1", "bg-red-500"); return; }
+
+            // --- Створення Приладу 2 (якщо потрібно) ---
+            let devL2 = 0, devW2 = 0, devH2 = 0, spacing = 0;
+            if (useTwoDevices) {
+                devL2 = Math.max(0.1, parseFloat(deviceLInput2.value) * factor);
+                devW2 = Math.max(0.1, parseFloat(deviceWInput2.value) * factor);
+                devH2 = Math.max(0.1, parseFloat(deviceHInput2.value) * factor);
+                spacing = Math.max(0, parseFloat(deviceSpacingInput.value) * factor);
+                console.log(`3D Check: Device 2 (mm): ${devL2}x${devW2}x${devH2}, Spacing: ${spacing}`);
+
+                try {
+                    const deviceData2 = createDevice(devL2, devH2, devW2); // width=L, height=H, depth=W
+                    deviceGroup2 = deviceData2.visibleGroup;
+                    deviceCollisionMesh2 = deviceData2.collisionMesh;
+                    scene.add(deviceGroup2);
+                    scene.add(deviceCollisionMesh2);
+                    console.log("3D Check: Device 2 created");
+                } catch(error) { console.error("3D Check: Device 2 creation error:", error); updateStatus("Помилка геометрії приладу 2", "bg-red-500"); return; }
+
+                // --- Позиціонування двох приладів ---
+                const totalDeviceHeight = devH1 + spacing + devH2;
+                // Y координата центру першого приладу (знизу)
+                const y1 = -(spacing / 2 + devH2 / 2);
+                // Y координата центру другого приладу (зверху)
+                const y2 = spacing / 2 + devH1 / 2;
+
+                deviceGroup1.position.y = y1;
+                deviceCollisionMesh1.position.y = y1;
+                deviceGroup2.position.y = y2;
+                deviceCollisionMesh2.position.y = y2;
+
+            } else {
+                // Якщо тільки один прилад, центруємо його по Y
+                deviceGroup1.position.y = 0;
+                deviceCollisionMesh1.position.y = 0;
+            }
+
+
+            // --- Створення Bounding Box для ВНУТРІШНЬОГО простору ящика ---
             boxBoundingBox = new THREE.Box3(
                 new THREE.Vector3(-boxL / 2, -boxH / 2, -boxW / 2),
                 new THREE.Vector3(boxL / 2, boxH / 2, boxW / 2)
@@ -555,14 +645,23 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
             centerCamera(); // Центруємо камеру
         }
 
-        // --- Застосування обертання до приладу ---
+        // --- Застосування обертання до приладів ---
         function applyDeviceRotation() {
-             if (!deviceGroup || !deviceCollisionMesh) return;
+             if (!deviceGroup1 || !deviceCollisionMesh1) return; // Потрібен хоча б перший
             const rotX = THREE.MathUtils.degToRad(parseFloat(rotateXSlider.value));
             const rotY = THREE.MathUtils.degToRad(parseFloat(rotateYSlider.value));
             const rotZ = THREE.MathUtils.degToRad(parseFloat(rotateZSlider.value));
-            deviceGroup.rotation.set(rotX, rotY, rotZ, 'ZYX');
-            deviceCollisionMesh.rotation.set(rotX, rotY, rotZ, 'ZYX');
+
+            // Обертаємо перший прилад
+            deviceGroup1.rotation.set(rotX, rotY, rotZ, 'ZYX');
+            deviceCollisionMesh1.rotation.set(rotX, rotY, rotZ, 'ZYX');
+
+            // Обертаємо другий прилад, якщо він існує
+            if (deviceGroup2 && deviceCollisionMesh2) {
+                 deviceGroup2.rotation.set(rotX, rotY, rotZ, 'ZYX');
+                 deviceCollisionMesh2.rotation.set(rotX, rotY, rotZ, 'ZYX');
+            }
+
             rotateXValueSpan.textContent = rotateXSlider.value;
             rotateYValueSpan.textContent = rotateYSlider.value;
             rotateZValueSpan.textContent = rotateZSlider.value;
@@ -571,80 +670,107 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
 
         // --- Перевірка зіткнення, розрахунок зазору та оновлення списку кейсів ---
         function checkCollision() {
-             if (!deviceCollisionMesh || !boxBoundingBox) {
+            const useTwoDevices = twoDevicesCheckbox.checked;
+
+            // Перевіряємо наявність необхідних об'єктів
+            if (!deviceCollisionMesh1 || !boxBoundingBox || (useTwoDevices && !deviceCollisionMesh2)) {
                  updateStatus("Очікування...", "bg-gray-400");
                  updateClearanceDisplay(null, null, null);
-                 updateSuitableCasesList([]); // Очистити список кейсів
+                 updateSuitableCasesList([]);
                  return;
             }
-            deviceCollisionMesh.updateMatrixWorld();
-            const deviceAABB = new THREE.Box3().setFromObject(deviceCollisionMesh, true);
-            const deviceSize = deviceAABB.getSize(new THREE.Vector3()); // Розміри AABB приладу (X, Y, Z)
-            const innerBoxSize = boxBoundingBox.getSize(new THREE.Vector3()); // Розміри поточного ящика
 
-             const geometry = deviceCollisionMesh.geometry;
-             if (!geometry || !geometry.getAttribute('position')) {
-                  updateStatus("Помилка геометрії", "bg-red-500");
-                  updateClearanceDisplay(null, null, null);
-                  updateSuitableCasesList([]);
-                  return;
-             }
-             const positionAttribute = geometry.getAttribute('position');
-             const vertices = [];
-             for (let i = 0; i < positionAttribute.count; i++) {
-                 const vertex = new THREE.Vector3();
-                 vertex.fromBufferAttribute(positionAttribute, i);
-                 vertices.push(vertex);
-             }
-             const worldVertices = vertices.map(vertex => vertex.applyMatrix4(deviceCollisionMesh.matrixWorld));
-             let fits = true;
-             const checkBox = new THREE.Box3(
-                  boxBoundingBox.min.clone().addScalar(epsilon),
-                  boxBoundingBox.max.clone().subScalar(epsilon)
-              );
-             for (const vertex of worldVertices) {
-                 if (!checkBox.containsPoint(vertex)) { fits = false; break; }
-             }
+            // Оновлюємо матриці світу
+            deviceCollisionMesh1.updateMatrixWorld();
+            if (useTwoDevices) {
+                deviceCollisionMesh2.updateMatrixWorld();
+            }
 
-            // Розрахунок зазорів для поточного ящика
+            // --- Перевірка вершин ---
+            let allVertices = [];
+            let fits = true;
+
+            // Вершини першого приладу
+            const geom1 = deviceCollisionMesh1.geometry;
+            if (!geom1 || !geom1.getAttribute('position')) { updateStatus("Помилка геометрії 1", "bg-red-500"); updateClearanceDisplay(null, null, null); updateSuitableCasesList([]); return; }
+            const posAttr1 = geom1.getAttribute('position');
+            for (let i = 0; i < posAttr1.count; i++) { const v = new THREE.Vector3(); v.fromBufferAttribute(posAttr1, i); allVertices.push(v.applyMatrix4(deviceCollisionMesh1.matrixWorld)); }
+
+            // Вершини другого приладу (якщо є)
+            if (useTwoDevices) {
+                const geom2 = deviceCollisionMesh2.geometry;
+                if (!geom2 || !geom2.getAttribute('position')) { updateStatus("Помилка геометрії 2", "bg-red-500"); updateClearanceDisplay(null, null, null); updateSuitableCasesList([]); return; }
+                const posAttr2 = geom2.getAttribute('position');
+                for (let i = 0; i < posAttr2.count; i++) { const v = new THREE.Vector3(); v.fromBufferAttribute(posAttr2, i); allVertices.push(v.applyMatrix4(deviceCollisionMesh2.matrixWorld)); }
+            }
+
+            // Перевірка всіх вершин
+            const checkBox = new THREE.Box3(boxBoundingBox.min.clone().addScalar(epsilon), boxBoundingBox.max.clone().subScalar(epsilon));
+            for (const vertex of allVertices) {
+                if (!checkBox.containsPoint(vertex)) { fits = false; break; }
+            }
+
+            // --- Розрахунок зазору (на основі комбінованого AABB) ---
             let clrL = null, clrW = null, clrH = null;
+            let combinedDeviceSize = new THREE.Vector3(); // Розмір комбінованого AABB
+            const combinedAABB = new THREE.Box3();
+
             if (fits) {
-                clrL = innerBoxSize.x - deviceSize.x;
-                clrW = innerBoxSize.z - deviceSize.z; // W = Z
-                clrH = innerBoxSize.y - deviceSize.y; // H = Y
-            }
-
-            // Оновлення статусу та кольору поточного приладу
-            if (deviceGroup && deviceGroup.children.length > 0) {
-                 const mainBodyMesh = deviceGroup.children[0];
-                 if (mainBodyMesh && mainBodyMesh.isMesh) {
-                    mainBodyMesh.material.color.setHex(fits ? deviceColorFit : deviceColorNoFit);
+                 // Розраховуємо комбінований AABB
+                 combinedAABB.setFromObject(deviceCollisionMesh1, true);
+                 if (useTwoDevices) {
+                     combinedAABB.expandByObject(deviceCollisionMesh2, true);
                  }
-            }
-            updateStatus(fits ? "Вміщується" : "Не вміщується", fits ? "bg-green-500" : "bg-red-500");
-            updateClearanceDisplay(clrL, clrW, clrH);
+                 combinedDeviceSize = combinedAABB.getSize(new THREE.Vector3());
+                 const innerBoxSize = boxBoundingBox.getSize(new THREE.Vector3());
 
-            // --- Пошук та сортування підходящих кейсів з пресетів ---
+                 clrL = innerBoxSize.x - combinedDeviceSize.x;
+                 clrW = innerBoxSize.z - combinedDeviceSize.z; // W = Z
+                 clrH = innerBoxSize.y - combinedDeviceSize.y; // H = Y
+            }
+             updateClearanceDisplay(clrL, clrW, clrH);
+
+
+            // --- Оновлення статусу та кольорів ---
+            updateStatus(fits ? "Вміщується" : "Не вміщується", fits ? "bg-green-500" : "bg-red-500");
+            // Колір першого приладу
+            if (deviceGroup1 && deviceGroup1.children.length > 0) {
+                 const body1 = deviceGroup1.children[0];
+                 if (body1 && body1.isMesh) { body1.material.color.setHex(fits ? deviceColorFit : deviceColorNoFit); }
+            }
+             // Колір другого приладу
+             if (useTwoDevices && deviceGroup2 && deviceGroup2.children.length > 0) {
+                 const body2 = deviceGroup2.children[0];
+                 if (body2 && body2.isMesh) { body2.material.color.setHex(fits ? deviceColorFit : deviceColorNoFit); }
+             }
+
+
+            // --- Пошук та сортування підходящих кейсів ---
             const fittingCases = [];
+             // Використовуємо розмір комбінованого AABB для пошуку кейсів
+             // Якщо не 'fits', combinedDeviceSize може бути не розрахований, тому беремо AABB першого
+             const checkDeviceSize = fits ? combinedDeviceSize : new THREE.Box3().setFromObject(deviceCollisionMesh1, true).getSize(new THREE.Vector3());
+             // Якщо два прилади, але вони не вміщуються, треба розрахувати комбінований AABB все одно для пошуку
+             if (useTwoDevices && !fits) {
+                  const tempCombinedAABB = new THREE.Box3().setFromObject(deviceCollisionMesh1, true);
+                  tempCombinedAABB.expandByObject(deviceCollisionMesh2, true);
+                  checkDeviceSize.copy(tempCombinedAABB.getSize(new THREE.Vector3()));
+             }
+
+
             for (const presetName in casePresets) {
                 const preset = casePresets[presetName];
-                // Перевірка, чи вміщується AABB приладу в цей пресет
-                if (preset.l >= deviceSize.x - epsilon &&
-                    preset.h >= deviceSize.y - epsilon && // H = Y
-                    preset.w >= deviceSize.z - epsilon) { // W = Z
+                if (preset.l >= checkDeviceSize.x - epsilon &&
+                    preset.h >= checkDeviceSize.y - epsilon && // H = Y
+                    preset.w >= checkDeviceSize.z - epsilon) { // W = Z
 
-                    // Розрахунок сумарного зазору для сортування
-                    const clearanceSum = (preset.l - deviceSize.x) +
-                                         (preset.w - deviceSize.z) +
-                                         (preset.h - deviceSize.y);
+                    const clearanceSum = (preset.l - checkDeviceSize.x) +
+                                         (preset.w - checkDeviceSize.z) +
+                                         (preset.h - checkDeviceSize.y);
                     fittingCases.push({ name: presetName, clearanceSum: clearanceSum });
                 }
             }
-
-            // Сортування за зростанням сумарного зазору
             fittingCases.sort((a, b) => a.clearanceSum - b.clearanceSum);
-
-            // Оновлення списку в UI
             updateSuitableCasesList(fittingCases);
         }
 
@@ -673,7 +799,6 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
              } else {
                  fittingCases.forEach(item => {
                      const li = document.createElement('li');
-                     // Можна додати сумарний зазор: item.name + ` (Зазор: ${item.clearanceSum.toFixed(1)} мм)`
                      li.textContent = item.name;
                      suitableCasesListElement.appendChild(li);
                  });
@@ -691,7 +816,11 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
         function centerCamera() {
              if (!boxMesh || !camera || !controls) return;
             console.log("3D Check: Centering camera...");
-            const boundingBox = new THREE.Box3().setFromObject(boxMesh);
+            const boundingBox = new THREE.Box3().setFromObject(boxMesh); // Центруємо по візуальному ящику
+            // Додатково розширимо bounding box, щоб включити прилади, якщо вони виходять за межі візуального ящика (малоймовірно, але про всяк випадок)
+            if (deviceGroup1) boundingBox.expandByObject(deviceGroup1);
+            if (deviceGroup2) boundingBox.expandByObject(deviceGroup2);
+
             const center = boundingBox.getCenter(new THREE.Vector3());
             const size = boundingBox.getSize(new THREE.Vector3());
             const maxDim = Math.max(size.x, size.y, size.z);
@@ -699,7 +828,7 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
             const fitHeightDistance = maxDim / (2 * Math.atan(Math.PI * camera.fov / 360));
             const fitWidthDistance = fitHeightDistance / camera.aspect;
             // Збільшено коефіцієнт для більшого віддалення
-            const distance = 1.8 * Math.max(fitHeightDistance, fitWidthDistance);
+            const distance = 1.9 * Math.max(fitHeightDistance, fitWidthDistance); // Збільшено до 1.9
             const finalDistance = Math.max(controls.minDistance * 1.5, Math.min(distance, controls.maxDistance * 0.8));
              if (!isFinite(finalDistance)) { console.warn("Calculated camera distance is not finite."); return; }
             const direction = new THREE.Vector3(0.6, 0.5, 1).normalize();
@@ -751,23 +880,26 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
 
          // --- Заповнення списку пресетів приладів ---
         function populateDevicePresetDropdown() {
-            devicePresetSelect.innerHTML = '<option value="">-- Вибрати пресет --</option>';
-            for (const name in devicePresets) {
-                const option = document.createElement('option');
-                option.value = name;
-                option.textContent = name;
-                devicePresetSelect.appendChild(option);
-            }
-            console.log("3D Check: Device Preset dropdown populated.");
+            // Заповнюємо обидва списки
+            [devicePresetSelect1, devicePresetSelect2].forEach(select => {
+                 if (!select) return; // Перевірка на випадок помилки в HTML
+                 select.innerHTML = '<option value="">-- Вибрати пресет --</option>';
+                 for (const name in devicePresets) {
+                     const option = document.createElement('option');
+                     option.value = name;
+                     option.textContent = name;
+                     select.appendChild(option);
+                 }
+            });
+            console.log("3D Check: Device Preset dropdowns populated.");
         }
 
          // --- Встановлення дефолтного пресету приладу ---
          function setDefaultDevicePreset() {
              const defaultPresetName = Object.keys(devicePresets)[0];
-             if (defaultPresetName) {
-                 devicePresetSelect.value = defaultPresetName;
-                 // Ініціюємо подію 'change', щоб заповнити поля
-                 devicePresetSelect.dispatchEvent(new Event('change'));
+             if (defaultPresetName && devicePresetSelect1) { // Встановлюємо тільки для першого
+                 devicePresetSelect1.value = defaultPresetName;
+                 devicePresetSelect1.dispatchEvent(new Event('change'));
                  console.log("3D Check: Default device preset applied:", defaultPresetName);
              }
          }
@@ -780,13 +912,17 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
                 debounceCreateObjects();
             });
 
+            // Обробник для всіх полів вводу розмірів
             dimensionInputs.forEach(input => {
                 input.addEventListener('input', (e) => {
                      if (e.target.type === 'number' && parseFloat(e.target.value) < 0) e.target.value = '0';
+                     // Мінімальне значення для відстані - 0
+                     if (e.target.id === 'deviceSpacing' && parseFloat(e.target.value) < 0) e.target.value = '0';
                      debounceCreateObjects(150);
                 });
             });
 
+             // Обробник для +/- кнопок
              adjustButtons.forEach(button => {
                 button.addEventListener('click', (event) => {
                     const targetId = event.currentTarget.dataset.target;
@@ -795,7 +931,7 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
                     if (targetInput) {
                         let currentValue = parseFloat(targetInput.value) || 0;
                         let newValue = currentValue + step;
-                        let minValue = 0.1;
+                        let minValue = (targetId === 'deviceSpacing') ? 0 : 0.1; // Мін. відстань 0
                         newValue = Math.max(minValue, newValue);
                         targetInput.value = parseFloat(newValue.toFixed(2));
                         targetInput.dispatchEvent(new Event('input', { bubbles: true }));
@@ -803,6 +939,7 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
                 });
             });
 
+            // Обробник для пресетів кейсів
             casePresetSelect.addEventListener('change', (event) => {
                 const selectedPresetName = event.target.value;
                 if (selectedPresetName && casePresets[selectedPresetName]) {
@@ -815,17 +952,34 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
                 }
             });
 
-             devicePresetSelect.addEventListener('change', (event) => {
-                const selectedPresetName = event.target.value;
-                if (selectedPresetName && devicePresets[selectedPresetName]) {
-                    const preset = devicePresets[selectedPresetName];
-                    const factor = conversionFactors[unitSelect.value];
-                    deviceLInput.value = (preset.l / factor).toFixed(1);
-                    deviceWInput.value = (preset.w / factor).toFixed(1);
-                    deviceHInput.value = (preset.h / factor).toFixed(1);
-                    deviceLInput.dispatchEvent(new Event('input', { bubbles: true }));
-                }
-            });
+             // Обробники для пресетів приладів
+             [devicePresetSelect1, devicePresetSelect2].forEach((select, index) => {
+                 if (!select) return;
+                 select.addEventListener('change', (event) => {
+                    const selectedPresetName = event.target.value;
+                    if (selectedPresetName && devicePresets[selectedPresetName]) {
+                        const preset = devicePresets[selectedPresetName];
+                        const factor = conversionFactors[unitSelect.value];
+                        const lInput = document.getElementById(`deviceL${index + 1}`);
+                        const wInput = document.getElementById(`deviceW${index + 1}`);
+                        const hInput = document.getElementById(`deviceH${index + 1}`);
+                        if (lInput && wInput && hInput) {
+                            lInput.value = (preset.l / factor).toFixed(1);
+                            wInput.value = (preset.w / factor).toFixed(1);
+                            hInput.value = (preset.h / factor).toFixed(1);
+                            lInput.dispatchEvent(new Event('input', { bubbles: true }));
+                        }
+                    }
+                });
+             });
+
+             // Обробник для чекбокса "Два прилади"
+             twoDevicesCheckbox.addEventListener('change', (event) => {
+                 const show = event.target.checked;
+                 deviceTwoControlsDiv.classList.toggle('hidden', !show);
+                 deviceSpacingControlsDiv.classList.toggle('hidden', !show);
+                 debounceCreateObjects(); // Перестворити сцену
+             });
 
 
             [rotateXSlider, rotateYSlider, rotateZSlider].forEach(slider => {
@@ -869,20 +1023,6 @@ Peli HardBackКейс 1075 HardBack 282 x 201 x 41
             init();
         };
 
-    </script>
-    <script>
-      // Реєстрація Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
-            .then(registration => {
-              console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            })
-            .catch(err => {
-              console.log('ServiceWorker registration failed: ', err);
-            });
-        });
-      }
     </script>
 </body>
 </html>
